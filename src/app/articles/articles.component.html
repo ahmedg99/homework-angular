@@ -7,17 +7,16 @@
     </div>
   </div>
 
-<div *ngFor="let la of listArticles , let i =index">
+<div *ngFor="let la of listArticles | slice:0:numbMax , let i =index">
     <div *ngIf="listArticles[i].categorie != 'Travail' ">
         <div *ngIf="numbMax<= listArticles.length|| numbMax==null">
 
 
 
+             <div    [ngStyle]="{ 'color' : listArticles[i].categorie ==='Education' ? 'blue' : 'null'  }">
 
-            <div    [ngStyle]="{ color : listArticles[i].categorie=='Education' ? 'blue' : 'black'  }">
 
-
-<fieldset class="border"   style="border-color : red;">
+<fieldset class="border"   >
     
     <legend   class="float-none w-auto p-2"  >{{la.titre}}</legend>
     
