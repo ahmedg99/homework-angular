@@ -1,0 +1,138 @@
+<fieldset class="border">
+    <legend class="float-none w-auto p-2">Informations générales</legend>
+
+    <form #f='ngForm' style="padding: 20px" class="form-group">
+        <!--nom -->
+        <div class="row g-3 align-items-center form-group ">
+            <div class="col-auto">
+                <label class="col-form-label">Nom</label>
+            </div>
+            <div class="col-auto">
+                <input  name="nom" #n="ngModel" placeholder="Entrer votre nom"  [(ngModel)]="infos.nom"
+                    [ngClass]="{'is-invalid':n.invalid , 'is-valid':n.valid}" type="text"
+                    class="form-control" required />
+            </div>
+            <div class="col-auto"  >  
+                <div  *ngIf="n.errors?.['required']"  style="color:#dc3545"  >
+                    veuillez remplir le champs title  
+                </div>
+                <div  *ngIf="n.valid"  style="color:#198754"  >
+                    nom valide  
+                </div>
+            </div>
+        </div>
+
+        <br />
+ 
+        <!--email -->
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label class="col-form-label">Email</label>
+            </div>
+            <div class="col-auto">
+                <input #email="ngModel" name="email" [(ngModel)]="infos.email"  [ngClass]="{'is-invalid':email.invalid , 'is-valid':email.valid}" type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3,}$" required />
+            </div>
+            <div class="col-auto"  >  
+
+                <div  *ngIf="email.errors?.['required']"  style="color:#dc3545"  >
+                    veuillez remplir le champs email  
+                </div>
+                <div  *ngIf="email.errors?.['pattern']"  style="color:#dc3545"  >
+                    veuillez saisir un email valide  
+                </div>
+                <div  *ngIf="email.valid"  style="color:#198754"  >
+                    email valide  
+                </div>
+            </div>
+            </div>
+
+        <!--info paiement -->
+        <fieldset class="border">
+            <legend class="float-none w-auto p-2">Informations générales</legend>
+
+            <form style="padding: 20px">
+                <!--Type de carte -->
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label class="col-form-label">Type de carte</label>
+                    </div>
+                    <div class="col-auto">
+                        <input #type="ngModel" name="type" [(ngModel)]="infos.type" required  type="text" class="form-control" [ngClass]="{'is-valid' : type.valid, 'is-invalid': type.invalid}" />
+                    </div>
+                    <div class="col-auto"  >  
+
+                        <div  *ngIf="type.errors?.['required']"  style="color:#dc3545"  >
+                            veuillez remplir le champs type carte  
+                        </div>
+  
+                        <div  *ngIf="type.valid"  style="color:#198754"  >
+                            type valide  
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <!--Numéro de carte -->
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label class="col-form-label">Numéro de carte</label>
+                    </div>
+                    <div class="col-auto">
+                        <input #numm="ngModel" name="numm" [(ngModel)]="infos.numm" required  type="text" class="form-control" maxlength="16" pattern="[0-9]{16}"  [ngClass]="{'is-valid' : numm.valid, 'is-invalid': numm.invalid}" />
+                     </div>
+                    <div class="col-auto">
+                        <div    *ngIf="numm.errors?.['required']"  style="color:#dc3545" >
+                            veuillez entrer le numéro 
+                        </div>
+                        <div  *ngIf="numm.valid"  style="color:#198754"  >
+                            numéro carte  valide   
+                        </div>
+                        <div  *ngIf="numm.errors?.['pattern']"  style="color:#dc3545"  >
+                          entrer un   numéro carte  valide   
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <!--Date d'expiration -->
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label class="col-form-label">Date d'expiration</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" class="form-control" #date="ngModel"  [ngClass]="{'is-valid' : date.valid , 'is-invalid':date.invalid}"    name="date" [(ngModel)]="infos.date"   required   />
+                    </div>
+                    <div class="col-auto">
+                        <div    *ngIf="date.errors?.['required']"  style="color:#dc3545" >
+                            veuillez entrer la date 
+                        </div>
+                        <div  *ngIf="date.valid"  style="color:#198754"  >
+                            date valide   
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <!--code -->
+
+                <div class="row g-3 align-items-center"  *ngIf='type.valid && date.valid && numm.valid'>
+                    <div class="col-auto">
+                      <label for="inputPassword6" class="col-form-label">Code</label>
+                    </div>
+                    <div class="col-auto"  >
+                        <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline" [type]=""  >
+                      </div>
+ 
+                    <div class="col-auto">
+                      <span id="passwordHelpInline" class="form-text">
+                        contient 16 chiffres
+                      </span>
+                    </div>
+                  </div>
+            </form>
+        </fieldset>
+
+        <br />
+        <button type="submit" class="btn btn-primary"   [disabled] = "f.invalid">Ajouter</button>
+    </form>
+</fieldset>
+
+
+ 
